@@ -11,3 +11,11 @@
 2. `cd ytdl && npm install`
 3. `node app.js <playlistID> [<playlistFolder>|playlist name <numberOfMusicsToDL>|all]`
 4. Enjoy !
+
+# Example
+Downloading the first 30 songs from [this](https://www.youtube.com/playlist?list=PLWGs1GkjF6qoa4gowzyUrLjaNQt_FsQib) playlist
+```bash
+node app.js PLWGs1GkjF6qoa4gowzyUrLjaNQt_FsQib oldButGold 30
+```
+
+It will skip previously downloaded songs in `oldButGold`, so you can update playlists (by downloading in the same folder)
