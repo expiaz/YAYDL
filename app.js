@@ -1,6 +1,6 @@
 /*
 call with <playlistid> [<folder name>] [<limit>]
-
+@TODO Chalk
 */
 
 const fs = require('fs');
@@ -26,16 +26,19 @@ const [
 if (plId) {
     ytpl(plId, { limit })
         .then(({ title, items }) => {
-            !fs.existsSync('./ytdl') && fs.mkdirSync('./ytdl')
+            //!fs.existsSync('./ytdl') && fs.mkdirSync('./ytdl')
 
-            const plFolder = path.resolve(`./ytdl/${filenamify(folder || title)}`)
-            !fs.existsSync(plFolder) && fs.mkdirSync(plFolder)
+            const plFolder = folder ? path.resolve(folder) : filenamify(title)
+            if (! fs.existsSync(plFolder)) {
+                console.log('Creating folder ' + plFolder)
+                fs.mkdirSync(plFolder)
+            }
 
             const maxTitleSize = items.map(e => e.title)
                 .sort((a, b) => a.length - b.length)
                 .pop().length
             const multi = new Multiprogress();
-            
+
             items.forEach(({ id, title }) => {
                 const padding = ' '.repeat(maxTitleSize - title.length)
                 const fileName = `${plFolder}/${filenamify(title)}`
@@ -67,7 +70,9 @@ if (plId) {
                                     fs.unlink(fileName + '.mp4', err => {
                                         if(err) throw err
                                     })
-                                    // bar finish
+                                    // @TODO prints console.log('Finished ' + fileName + '.mp3')
+                                    // @TODO bar finish
+                                    // @TODO throttle ?
                                 })
                         })
                 }

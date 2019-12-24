@@ -19,3 +19,10 @@ node app.js PLWGs1GkjF6qoa4gowzyUrLjaNQt_FsQib oldButGold 30
 ```
 
 It will skip previously downloaded songs in `oldButGold`, so you can update playlists (by downloading in the same folder)
+
+# Alternative
+
+Using [youtube-dl](https://github.com/ytdl-org/youtube-dl) directly
+```bash
+youtube-dl -i -x --audio-format mp3 <playlistURL> -o <outputDirectory>
+```
